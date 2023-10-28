@@ -1,0 +1,41 @@
+Sub DatumKorrigieren()
+
+Dim dd As String
+Dim mm As String
+Dim yyyy As String
+Dim cell As Range
+
+For Each cell In Range("J71:J71")
+    If IsDate(cell) Then
+        mm = Split(cell, "/")(0)
+        dd = Split(cell, "/")(1)
+        yyyy = Split(cell, "/")(2)
+        If Len(mm) <= 1 Then
+            mm = "0" + mm
+        ElseIf Len(dd) <= 1 Then
+            dd = "0" + dd
+        End If
+        cell = dd + "." + mm + "." + yyyy
+    ElseIf IsNumeric(cell) Xor IsDate(cell) Then
+        cell = Date
+    ElseIf cell <> IsDate(cell) Then
+        mm = Split(cell, " ")(0)
+        dd = Split(cell, " ")(1)
+        yyyy = Split(cell, ",")(1)
+        If Len(mm) <= 1 Or Len(mm) > 2 Then
+            mm = mm
+        ElseIf Len(dd) <= 1 Then
+            dd = "0" + dd
+        End If
+        cell = dd + " " + mm + " " + "20" + yyyy
+    ElseIf IsMissing(cell) Then
+        cell.Interior.ColorIndex = 3
+    Else
+        Date.from (cell)
+        
+    End If
+Next
+End Sub
+
+
+

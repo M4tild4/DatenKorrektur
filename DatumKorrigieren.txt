@@ -1,0 +1,26 @@
+Sub DatumKorrigieren()
+
+Dim dd As String
+Dim mm As String
+Dim yyyy As String
+Dim zelle As String
+
+zelle = Range("J10")
+
+mm = Split(zelle, "/")(0)
+dd = Split(zelle, "/")(1)
+yyyy = Split(zelle, "/")(2)
+
+If Len(mm) <= 1 Then
+    mm = "0" + mm
+End If
+
+If Len(dd) <= 1 Then
+    dd = "0" + dd
+End If
+
+zelle = dd + "." + mm + "." + yyyy
+
+Range("J10") = zelle
+
+End Sub
